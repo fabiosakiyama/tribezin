@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping("/locations")
+@RequestMapping("/materials")
 @AllArgsConstructor
 public class MaterialController {
 
