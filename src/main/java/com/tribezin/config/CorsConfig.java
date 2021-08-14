@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.tribezin.config;
 
 import java.io.IOException;
 

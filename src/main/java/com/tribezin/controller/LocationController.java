@@ -1,6 +1,5 @@
-package com.example.demo.controller;
+package com.tribezin.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -16,46 +15,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.Monster;
-import com.example.demo.domain.enums.ElementType;
-import com.example.demo.domain.enums.MonsterType;
-import com.example.demo.repository.MonsterRepository;
+import com.tribezin.domain.Location;
+import com.tribezin.repository.LocationRepository;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping("/monsters")
+@RequestMapping("/locations")
 @AllArgsConstructor
-public class MonsterController {
+public class LocationController {
 
-	private MonsterRepository repository;
+	private LocationRepository repository;
 
 	private ModelMapper mapper;
 
-	@ApiOperation(value = "List monsters given the filters",
+	@ApiOperation(value = "List locations given the filters",
 			  notes = "The query matcher is 'contains' ")
 	@GetMapping
-	public ResponseEntity<Page<Monster>> list(@Valid Optional<MonsterFilter> filter, @ApiIgnore Pageable pageable) {
+	public ResponseEntity<Page<Location>> list(@Valid Optional<LocationFilter> filter, @ApiIgnore Pageable pageable) {
 		if (filter.isPresent()) {
 			ExampleMatcher caseInsensitiveExampleMatcher = ExampleMatcher.matchingAll().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING);
-			Monster model = mapper.map(filter.get(), Monster.class);
-		    Example<Monster> example = Example.of(model, caseInsensitiveExampleMatcher);
+			Location model = mapper.map(filter.get(), Location.class);
+		    Example<Location> example = Example.of(model, caseInsensitiveExampleMatcher);
 			return ResponseEntity.ok(repository.findAll(example, pageable));
 		}
 		return ResponseEntity.ok(repository.findAll(pageable));
 	}
 	
-	@ApiOperation(value = "List all monsters types")
-	@GetMapping("/types")
-	public ResponseEntity<List<MonsterType>> listTypes() {
-		return ResponseEntity.ok(repository.findDistinctType());
-	}
-	
-	@ApiOperation(value = "List all monsters element types")
-	@GetMapping("/element-types")
-	public ResponseEntity<List<ElementType>> listelementTypes() {
-		return ResponseEntity.ok(repository.findDistinctElementType());
-	}
 }

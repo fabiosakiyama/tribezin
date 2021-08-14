@@ -1,4 +1,4 @@
-package com.example.demo.domain.enums;
+package com.tribezin.domain.enums;
 
 public enum MonsterType {
 	

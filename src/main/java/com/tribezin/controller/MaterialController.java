@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.tribezin.controller;
 
 import java.util.Optional;
 
@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.domain.Location;
-import com.example.demo.repository.LocationRepository;
+import com.tribezin.domain.Material;
+import com.tribezin.repository.MaterialRepository;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping("/locations")
+@RequestMapping("/materials")
 @AllArgsConstructor
-public class LocationController {
+public class MaterialController {
 
-	private LocationRepository repository;
+	private MaterialRepository repository;
 
 	private ModelMapper mapper;
 
-	@ApiOperation(value = "List locations given the filters",
+	@ApiOperation(value = "List materials given the filters",
 			  notes = "The query matcher is 'contains' ")
 	@GetMapping
-	public ResponseEntity<Page<Location>> list(@Valid Optional<LocationFilter> filter, @ApiIgnore Pageable pageable) {
+	public ResponseEntity<Page<Material>> list(@Valid Optional<MaterialFilter> filter, @ApiIgnore Pageable pageable) {
 		if (filter.isPresent()) {
 			ExampleMatcher caseInsensitiveExampleMatcher = ExampleMatcher.matchingAll().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING);
-			Location model = mapper.map(filter.get(), Location.class);
-		    Example<Location> example = Example.of(model, caseInsensitiveExampleMatcher);
+			Material model = mapper.map(filter.get(), Material.class);
+		    Example<Material> example = Example.of(model, caseInsensitiveExampleMatcher);
 			return ResponseEntity.ok(repository.findAll(example, pageable));
 		}
 		return ResponseEntity.ok(repository.findAll(pageable));

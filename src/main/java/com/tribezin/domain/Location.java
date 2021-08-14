@@ -1,11 +1,16 @@
-package com.example.demo.domain;
+package com.tribezin.domain;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,8 +22,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Material {
-
+public class Location {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,5 +31,16 @@ public class Material {
 	@NotBlank
 	@Column(nullable = false)
 	private String name;
-
+	
+	@NotBlank
+	@Column(nullable = false)
+	private String description;
+	
+	@NotBlank
+	@Column(nullable = false)
+	private String imagePath;
+	
+	@OneToMany(mappedBy = "location")
+	@JsonBackReference
+	private List<Monster> monsters;
 }

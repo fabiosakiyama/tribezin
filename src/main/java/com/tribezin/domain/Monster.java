@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.tribezin.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.example.demo.domain.enums.ElementType;
-import com.example.demo.domain.enums.MonsterType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.tribezin.domain.enums.ElementType;
+import com.tribezin.domain.enums.MonsterType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

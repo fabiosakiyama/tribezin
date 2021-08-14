@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.tribezin.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class SpringFoxConfig {
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()    
           .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-         // .apis(RequestHandlerSelectors.basePackage("com.example.demo")())              
+         // .apis(RequestHandlerSelectors.basePackage("com.tribezin")())              
           .paths(PathSelectors.any())                          
           .build();                                           
     }
